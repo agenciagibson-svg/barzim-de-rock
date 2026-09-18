@@ -90,9 +90,15 @@ const FOTO_HERO = foto(
   "Mar de cabeças da plateia banhado por luz âmbar quente, com o palco pequeno ao fundo em vermelho e os telões mostrando Dino com a guitarra vermelha.",
 );
 
+/**
+ * Foto vertical de proposito: o quadro desta secao e retrato (0,86), e uma
+ * foto 3:2 deitada perdia 43% da largura no object-cover — era isso que
+ * deixava a imagem com cara de espremida. Esta ja nasce 4:5.
+ */
 const FOTO_PALCO = foto(
-  "palco-vermelho-dino-bracos-abertos",
-  'Dino de braços abertos ao centro do palco com a guitarra, sob luz vermelha intensa, com o letreiro "DINO BARZIM DE ROCK" ocupando todo o cenário de bar ao fundo.',
+  "vertical-dino-feixes-laranja",
+  "Dino cantando e tocando guitarra na passarela elevada e, abaixo, a banda no palco principal sob feixes laranja, com a plateia na base do enquadramento.",
+  "retrato",
 );
 
 /**
@@ -353,11 +359,11 @@ function Home() {
 
           Proporção 56/40 em vez de 50/50: a informação pesa mais que a foto. */}
       <section id="o-barzim" className="relative overflow-hidden">
-        <figure className="m-0 lg:absolute lg:inset-y-0 lg:right-0 lg:w-[40%]">
+        <figure className="m-0 lg:absolute lg:inset-y-0 lg:right-0 lg:w-[48%]">
           <img
             src={FOTO_PALCO.src}
             srcSet={FOTO_PALCO.srcSet}
-            sizes="(min-width: 1024px) 40vw, 100vw"
+            sizes="(min-width: 1024px) 48vw, 100vw"
             alt={FOTO_PALCO.alt}
             loading="lazy"
             width={FOTO_PALCO.width}
@@ -369,8 +375,8 @@ function Home() {
           <span className="pointer-events-none absolute inset-y-0 left-0 hidden w-32 bg-gradient-to-r from-ink to-transparent lg:block" />
         </figure>
 
-        <div className="mx-auto max-w-[min(92vw,2200px)] px-5 py-20 md:px-10 md:py-28">
-          <div className="lg:w-[56%]">
+        <div className="mx-auto max-w-[min(92vw,2200px)] px-5 py-20 md:px-10 md:py-24">
+          <div className="lg:w-[48%]">
             <h2 className="display titulo-secao-destaque max-w-[9ch]">Isso não é só um show</h2>
 
             <p className="lead mt-10 max-w-[62ch] text-bone/85">
