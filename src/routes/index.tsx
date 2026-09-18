@@ -1,26 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 
 import { Header } from "@/components/barzim/Header";
 import { Logo } from "@/components/barzim/Logo";
 import { Reveal } from "@/components/barzim/Reveal";
+import { VideoVertical } from "@/components/barzim/VideoVertical";
 import { INSTAGRAM, INSTAGRAM_HANDLE, whatsappUrl } from "@/lib/site";
 
-import hero from "@/assets/hero.jpg";
-import editorial1 from "@/assets/editorial-1.jpg";
-import editorial2 from "@/assets/editorial-2.jpg";
-import editorial3 from "@/assets/editorial-3.jpg";
-import reel1 from "@/assets/reel-1.jpg";
-import reel2 from "@/assets/reel-2.jpg";
-import reel3 from "@/assets/reel-3.jpg";
-import reel4 from "@/assets/reel-4.jpg";
+import { CREDITO_FOTOS, foto } from "@/lib/fotos";
+
 import prodCamiseta from "@/assets/prod-camiseta.jpg";
 import prodBone from "@/assets/prod-bone.jpg";
 import prodCopo from "@/assets/prod-copo.jpg";
 import prodPoster from "@/assets/prod-poster.jpg";
-import gal1 from "@/assets/gal-1.jpg";
-import gal2 from "@/assets/gal-2.jpg";
-import gal3 from "@/assets/gal-3.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,8 +19,7 @@ export const Route = createFileRoute("/")({
       { title: "Barzim de Rock — Dino Fonseca | Site oficial" },
       {
         name: "description",
-        content:
-          "O boteco do Dino, do jeito que o rock merece. Agenda, momentos, aftermovie e a Barzim Store.",
+        content: "O boteco do Dino, do jeito que o rock merece. Agenda, momentos e a Barzim Store.",
       },
       { property: "og:title", content: "Barzim de Rock — Dino Fonseca" },
       {
@@ -90,11 +80,49 @@ const SHOWS: Show[] = [
   },
 ];
 
-const REELS = [
-  { img: reel1, cidade: "Vila Aurora", legenda: "O coro que não para" },
-  { img: reel2, cidade: "Porto Serrano", legenda: "Refrão de 4 mil vozes" },
-  { img: reel3, cidade: "Rio Claro do Sul", legenda: "Solo no meio do público" },
-  { img: reel4, cidade: "Vila Aurora", legenda: "Depois da última música" },
+/* --------------------------------------------------------------- FOTOS ---
+ * Texto alternativo conforme MEDIA-MANIFEST.md. Fotos do Espaço Unimed,
+ * por Marcos Oliveira.
+ * ------------------------------------------------------------------------ */
+
+const FOTO_HERO = foto(
+  "plateia-luz-ambar",
+  "Mar de cabeças da plateia banhado por luz âmbar quente, com o palco pequeno ao fundo em vermelho e os telões mostrando Dino com a guitarra vermelha.",
+);
+
+const FOTO_PALCO = foto(
+  "palco-vermelho-dino-bracos-abertos",
+  'Dino de braços abertos ao centro do palco com a guitarra, sob luz vermelha intensa, com o letreiro "DINO BARZIM DE ROCK" ocupando todo o cenário de bar ao fundo.',
+);
+
+/**
+ * Momentos. Os três verticais são uma sequência real da mesma noite, por
+ * isso a ordem importa. Ficam como `<video>` próprio em vez de embed do
+ * Instagram: controle do visual, nenhum script de terceiro e nenhum
+ * rastreamento a reboque.
+ */
+const MOMENTOS = [
+  {
+    id: "reel-show-luzes-azuis",
+    video: "/videos/reel-show-luzes-azuis.mp4",
+    poster: "/videos/reel-show-luzes-azuis-poster.webp",
+    legenda: "O palco em luz quente",
+    descricao: "Dino em close com a guitarra, sob luz vermelha",
+  },
+  {
+    id: "reel-plateia-lotada",
+    video: "/videos/reel-plateia-lotada.mp4",
+    poster: "/videos/reel-plateia-lotada-poster.webp",
+    legenda: "O coro que não para",
+    descricao: "Vocalista de costas, braço estendido para a plateia lotada",
+  },
+  {
+    id: "reel-aftermovie-publico",
+    video: "/videos/reel-aftermovie-publico.mp4",
+    poster: "/videos/reel-aftermovie-publico-poster.webp",
+    legenda: "Do outro lado do palco",
+    descricao: "Guitarrista de óculos escuros com Telecaster creme, sob luz roxa",
+  },
 ];
 
 const PRODUTOS = [
@@ -162,12 +190,34 @@ const REDES = [
 ];
 
 const GALERIA = [
-  { img: gal1, alt: "Baterista tocando sob luz quente em um bar" },
-  { img: editorial2, alt: "Público cantando junto com copos erguidos" },
-  { img: gal3, alt: "Músico nos bastidores antes do show" },
-  { img: gal2, alt: "Vista ampla de um bar lotado durante um show" },
-  { img: editorial3, alt: "Microfone vintage com luzes âmbar ao fundo" },
-  { img: editorial1, alt: "Dino cantando com violão no palco do barzim" },
+  foto(
+    "show-palco-logo-verde-vermelho",
+    'Palco visto de frente com o letreiro "DINO BARZIM DE ROCK" aceso em vermelho e verde sobre um cenário de bar; a banda toca em silhueta e a plateia lotada aparece em primeiro plano.',
+  ),
+  foto(
+    "plateia-vista-geral-telao",
+    "Vista do fundo da casa: o palco ao longe entre dois telões que exibem Dino de guitarra, com feixes de luz amarela se abrindo sobre um auditório completamente cheio.",
+  ),
+  foto(
+    "dino-cantando-feixes-brancos",
+    'Dino canta ao microfone com uma guitarra sunburst no centro do palco, cercado por feixes brancos e fumaça, com o letreiro "BARZIM DE ROCK" à esquerda e o público em silhueta embaixo.',
+  ),
+  foto(
+    "plateia-holofote-estrela",
+    "Plateia sentada às mesas sob um holofote branco que estoura em forma de estrela, com refletores vermelhos no teto e Dino de jaqueta brilhante nos telões laterais.",
+  ),
+  foto(
+    "palco-vermelho-banda-completa",
+    "Palco inteiro lavado de vermelho com a banda completa — baixo, teclado, bateria e guitarras — e Dino cantando ao centro diante do cenário de bar.",
+  ),
+  foto(
+    "dino-chapeu-plateia-celulares",
+    "Vocalista de chapéu preto aponta para a plateia ao lado de um segundo cantor com violão, sob feixes brancos, enquanto o público ergue os celulares para filmar.",
+  ),
+  foto(
+    "plateia-feixes-brancos",
+    "Auditório lotado de mesas visto do fundo, sob feixes brancos e azuis cruzando a fumaça; nos telões laterais Dino canta ao microfone.",
+  ),
 ];
 
 /* ------------------------------------------------------------------------ */
@@ -209,14 +259,6 @@ function SectionTitle({ eyebrow, children }: { eyebrow: string; children: React.
 }
 
 function Home() {
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
     <div id="topo" className="bg-ink text-bone">
       <Header />
@@ -224,22 +266,30 @@ function Home() {
       {/* ---------------------------------------------------------- HERO */}
       <section className="grain relative min-h-[100svh] overflow-hidden">
         <img
-          src={hero}
-          alt="Público lotado em um show do Barzim de Rock com luzes quentes e fumaça"
-          width={1920}
-          height={1280}
+          src={FOTO_HERO.src}
+          srcSet={FOTO_HERO.srcSet}
+          sizes="100vw"
+          alt={FOTO_HERO.alt}
+          width={FOTO_HERO.width}
+          height={FOTO_HERO.height}
           fetchPriority="high"
-          className="absolute inset-0 h-[112%] w-full object-cover"
-          style={{ transform: `translateY(${Math.min(scrollY * 0.12, 120)}px)` }}
+          className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/55 to-ink" />
+        {/* Chapa única em vez do gradiente de três paradas que existia aqui:
+            aquele comia a plateia inteira, que é justamente o assunto da
+            foto. Esta escurece só o suficiente para o texto. */}
+        <div className="absolute inset-0 bg-ink/45" />
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink to-transparent" />
 
-        <div className="relative mx-auto flex min-h-[100svh] max-w-[1400px] flex-col justify-end px-5 pb-14 pt-32 md:px-10 md:pb-20">
+        <div className="relative mx-auto flex min-h-[100svh] max-w-[1600px] flex-col justify-end px-5 pb-14 pt-32 md:px-10 md:pb-20">
           {/* Primeira dobra sem <Reveal>: é o LCP da página e o primeiro
               contato com a marca. Aparece pronta, não animada. */}
           <p className="eyebrow">Site oficial · Dino Fonseca</p>
 
-          <h1 className="display mt-5 max-w-5xl text-balance text-[3.1rem] leading-[0.88] sm:text-7xl lg:text-[7.4rem]">
+          {/* Anton ocupa bem mais largura que o Oswald no mesmo corpo. O
+              clamp é calibrado para a linha mais longa ("O boteco do Dino.")
+              não estourar em nenhuma largura entre 320px e 1600px. */}
+          <h1 className="display mt-5 max-w-[18ch] text-[clamp(2.5rem,8.5vw,8.5rem)] leading-[0.86]">
             O boteco do Dino.
             <span className="block text-ember">Do jeito que o rock merece.</span>
           </h1>
@@ -252,8 +302,8 @@ function Home() {
             <a href="#agenda" className="btn-base btn-ember">
               Próximo Barzim
             </a>
-            <a href="#aftermovie" className="btn-base btn-ghost">
-              Assistir aftermovie
+            <a href="#momentos" className="btn-base btn-ghost">
+              Ver uma noite de barzim
             </a>
           </div>
 
@@ -284,152 +334,71 @@ function Home() {
       </section>
 
       {/* ------------------------------------------------------ O BARZIM */}
-      <section id="o-barzim" className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-36">
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-5">
-            <Reveal>
-              <SectionTitle eyebrow="O Barzim">
-                Isso não é<span className="block text-ember">só um show</span>
-              </SectionTitle>
-            </Reveal>
-            <Reveal delay={120}>
-              <p className="mt-8 max-w-md text-lg font-light leading-relaxed text-bone/70">
-                Começou pequeno, num balcão de madeira, com clássicos que todo mundo sabe de cor.
-                Hoje é uma noite inteira construída pelo público — e ainda tem cara de boteco.
-              </p>
-            </Reveal>
-            <Reveal delay={200}>
-              <dl className="mt-12 grid grid-cols-2 gap-8">
-                {[
-                  ["+120", "noites de barzim"],
-                  ["+40", "cidades"],
-                  ["3h", "de clássicos"],
-                  ["1", "coro só"],
-                ].map(([n, l]) => (
-                  <div key={l}>
-                    <dt className="display text-5xl text-ember">{n}</dt>
-                    <dd className="mt-1 text-xs uppercase tracking-[0.2em] text-bone/50">{l}</dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
-          </div>
+      {/* Sem `max-w` e sem `mx-auto`: a foto sangra até a borda direita da
+          tela. Numa tela larga, a coluna centrada de antes deixava faixas
+          vazias dos dois lados — o "buraco" que o site tinha. */}
+      <section id="o-barzim" className="grid items-center gap-12 lg:grid-cols-2 lg:gap-0">
+        <div className="px-5 py-24 md:px-10 md:py-36 lg:ml-auto lg:max-w-[46rem] lg:pr-20">
+          <h2 className="display text-[2.2rem] leading-[1] sm:text-[2.6rem]">
+            Isso não é só um show
+          </h2>
+          <p className="mt-8 max-w-[60ch] text-[1.0625rem] leading-[1.6] text-bone/80">
+            Começou pequeno, num balcão de madeira, com clássicos que todo mundo sabe de cor. Hoje é
+            uma noite inteira construída pelo público — e ainda tem cara de boteco.
+          </p>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:col-span-7">
-            <Reveal className="sm:col-span-1 sm:row-span-2">
-              <img
-                src={editorial1}
-                alt="Dino cantando com violão no palco de madeira do barzim"
-                loading="lazy"
-                width={1200}
-                height={1500}
-                className="h-full w-full object-cover grayscale-[15%]"
-              />
-            </Reveal>
-            <Reveal delay={140}>
-              <img
-                src={editorial2}
-                alt="Público cantando junto, copos erguidos"
-                loading="lazy"
-                width={1400}
-                height={900}
-                className="h-64 w-full object-cover sm:h-[17rem]"
-              />
-            </Reveal>
-            <Reveal delay={240}>
-              <img
-                src={editorial3}
-                alt="Microfone vintage com luzes âmbar ao fundo"
-                loading="lazy"
-                width={1000}
-                height={1000}
-                className="h-64 w-full object-cover sm:h-[17rem]"
-              />
-            </Reveal>
-          </div>
+          <dl className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 lg:grid-cols-2">
+            {[
+              ["+120", "noites de barzim"],
+              ["+40", "cidades"],
+              ["3h", "de clássicos"],
+              ["1", "coro só"],
+            ].map(([n, l]) => (
+              <div key={l}>
+                <dt className="display text-[3.5rem] leading-[0.9]">{n}</dt>
+                <dd className="mt-2 text-sm text-ash">{l}</dd>
+              </div>
+            ))}
+          </dl>
+          <DemoTag className="mt-10 max-w-[48ch]" />
         </div>
+
+        <figure className="relative m-0 h-[60vh] min-h-[26rem] lg:h-screen">
+          <img
+            src={FOTO_PALCO.src}
+            srcSet={FOTO_PALCO.srcSet}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            alt={FOTO_PALCO.alt}
+            loading="lazy"
+            width={FOTO_PALCO.width}
+            height={FOTO_PALCO.height}
+            className="h-full w-full object-cover"
+          />
+        </figure>
       </section>
 
       {/* ------------------------------------------------------ MOMENTOS */}
-      <section id="momentos" className="border-y border-white/10 bg-charcoal/40 py-24 md:py-32">
-        <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-          <Reveal>
-            <SectionTitle eyebrow="Reels">Momentos do Barzim</SectionTitle>
-          </Reveal>
+      <section id="momentos" className="hairline border-b border-white/10 py-24 md:py-32">
+        <div className="px-5 md:px-10">
+          <h2 className="display text-[clamp(3.25rem,8vw,6.5rem)] leading-[0.88]">
+            Momentos do Barzim
+          </h2>
 
-          <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-            {REELS.map((r, i) => (
-              <Reveal key={r.legenda} delay={i * 90}>
-                {/* Placeholder pronto para receber embed de Reel / vídeo vertical */}
-                <button
-                  type="button"
-                  data-video-slot={`reel-${i + 1}`}
-                  className="group relative block aspect-[9/16] w-full overflow-hidden bg-ink text-left"
-                >
-                  <img
-                    src={r.img}
-                    alt={`Momento do Barzim em ${r.cidade}`}
-                    loading="lazy"
-                    width={720}
-                    height={1280}
-                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
-                  />
-                  <span className="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
-                  <span className="absolute inset-0 grid place-items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <Play />
-                  </span>
-                  <span className="absolute inset-x-0 bottom-0 p-3 md:p-5">
-                    <span className="eyebrow block text-[0.6rem]">{r.cidade}</span>
-                    <span className="display mt-1 block text-sm md:text-lg">{r.legenda}</span>
-                  </span>
-                </button>
-              </Reveal>
+          {/* Três vídeos, três colunas: a grade preenche a largura inteira em
+              vez de deixar a quarta coluna vazia. */}
+          <div className="mt-14 grid gap-4 md:grid-cols-3 md:gap-6">
+            {MOMENTOS.map((m) => (
+              <VideoVertical key={m.id} {...m} />
             ))}
           </div>
-          <DemoTag className="mt-8" />
+
+          <p className="mt-8 text-xs text-ash">{CREDITO_FOTOS}</p>
         </div>
-      </section>
-
-      {/* ----------------------------------------------------- AFTERMOVIE */}
-      <section id="aftermovie" className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
-        <Reveal>
-          <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
-            <SectionTitle eyebrow="Aftermovie">Barzim 2025 em 3 minutos</SectionTitle>
-            <p className="max-w-sm text-bone/60">
-              O registro oficial da temporada. Espaço reservado para o vídeo definitivo.
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={140}>
-          {/* Placeholder 16:9 pronto para receber embed (YouTube/Vimeo/player próprio) */}
-          <button
-            type="button"
-            data-video-slot="aftermovie"
-            className="group relative mt-12 block aspect-video w-full overflow-hidden bg-charcoal"
-          >
-            <img
-              src={gal2}
-              alt="Cena de um barzim lotado durante o show"
-              loading="lazy"
-              width={1200}
-              height={800}
-              className="absolute inset-0 h-full w-full object-cover opacity-70 transition-all duration-[900ms] group-hover:scale-[1.03] group-hover:opacity-90"
-            />
-            <span className="absolute inset-0 bg-ink/45" />
-            <span className="absolute inset-0 grid place-items-center">
-              <Play big />
-            </span>
-            <span className="display absolute bottom-5 left-5 text-sm tracking-[0.22em] text-bone/70 md:bottom-8 md:left-8">
-              Aftermovie · 03:12
-            </span>
-          </button>
-        </Reveal>
       </section>
 
       {/* --------------------------------------------------------- AGENDA */}
       <section id="agenda" className="border-y border-white/10 bg-charcoal/40 py-24 md:py-32">
-        <div className="mx-auto max-w-[1400px] px-5 md:px-10">
+        <div className="mx-auto max-w-[1600px] px-5 md:px-10">
           <Reveal>
             <SectionTitle eyebrow="Agenda">Próximas edições</SectionTitle>
           </Reveal>
@@ -479,7 +448,7 @@ function Home() {
       </section>
 
       {/* ----------------------------------------------------------- LOJA */}
-      <section id="loja" className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
+      <section id="loja" className="mx-auto max-w-[1600px] px-5 py-24 md:px-10 md:py-32">
         <Reveal>
           <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <SectionTitle eyebrow="Store">Barzim Store</SectionTitle>
@@ -520,64 +489,36 @@ function Home() {
       </section>
 
       {/* -------------------------------------------------------- GALERIA */}
-      <section id="galeria" className="border-y border-white/10 bg-charcoal/40 py-24 md:py-32">
-        <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-          <Reveal>
-            <SectionTitle eyebrow="Galeria">Retratos da noite</SectionTitle>
-          </Reveal>
-          <div className="mt-14 columns-2 gap-4 md:columns-3 md:gap-6 [&>*]:mb-4 md:[&>*]:mb-6">
-            {GALERIA.map((g, i) => (
-              <Reveal key={i} delay={(i % 3) * 90}>
-                <img
-                  src={g.img}
-                  alt={g.alt}
-                  loading="lazy"
-                  className="w-full object-cover transition-all duration-700 hover:brightness-110"
-                />
-              </Reveal>
-            ))}
-          </div>
+      <section id="galeria" className="hairline border-b border-white/10 py-24 md:py-32">
+        <div className="px-5 md:px-10">
+          <h2 className="display text-[2.2rem] leading-[1] sm:text-[2.6rem]">Retratos da noite</h2>
         </div>
-      </section>
 
-      {/* --------------------------------------------------------- SOCIAL */}
-      <section className="mx-auto max-w-[1400px] px-5 py-24 md:px-10 md:py-32">
-        <Reveal>
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-            <SectionTitle eyebrow="Instagram">
-              O Barzim continua
-              <span className="block text-ember">fora do palco</span>
-            </SectionTitle>
-            <a
-              href={INSTAGRAM}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-base btn-ghost w-fit"
-            >
-              {INSTAGRAM_HANDLE}
-            </a>
-          </div>
-        </Reveal>
-
-        <div className="mt-14 grid grid-cols-3 gap-3 md:grid-cols-6 md:gap-4">
-          {[reel1, gal1, editorial2, reel3, gal3, reel4].map((img, i) => (
-            <Reveal key={i} delay={i * 70}>
-              <a
-                href={INSTAGRAM}
-                target="_blank"
-                rel="noreferrer"
-                className="group relative block aspect-square overflow-hidden"
-              >
-                <img
-                  src={img}
-                  alt="Publicação do Barzim de Rock no Instagram"
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-[900ms] group-hover:scale-110"
-                />
-                <span className="absolute inset-0 bg-ink/50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              </a>
-            </Reveal>
+        {/* Faixa que sangra dos dois lados e rola na horizontal. Substitui o
+            mosaico em colunas, que deixava buraco no fim de cada coluna e
+            recortava foto deitada em formato de retrato. */}
+        <ul
+          className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 md:gap-6 md:px-10"
+          style={{ scrollbarWidth: "thin" }}
+        >
+          {GALERIA.map((g) => (
+            <li key={g.src} className="m-0 shrink-0 snap-start">
+              <img
+                src={g.src}
+                srcSet={g.srcSet}
+                sizes="(min-width: 768px) 46rem, 80vw"
+                alt={g.alt}
+                loading="lazy"
+                width={g.width}
+                height={g.height}
+                className="h-[42vh] max-h-[30rem] w-auto object-cover md:h-[56vh]"
+              />
+            </li>
           ))}
+        </ul>
+
+        <div className="px-5 md:px-10">
+          <p className="mt-6 text-xs text-ash">{CREDITO_FOTOS}</p>
         </div>
       </section>
 
@@ -617,7 +558,7 @@ function Home() {
       </section>
 
       {/* ---------------------------------------------------------- FOOTER */}
-      <footer className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-20">
+      <footer className="mx-auto max-w-[1600px] px-5 py-16 md:px-10 md:py-20">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
             <Logo />

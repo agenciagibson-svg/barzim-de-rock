@@ -51,7 +51,7 @@ export function Header() {
           overlay do menu (z-40), que é irmão deste div dentro do mesmo
           contexto de empilhamento. Sem isso o overlay cobre o próprio botão
           que fecha ele, e o visitante fica preso com o scroll travado. */}
-      <div className="relative z-50 mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 md:px-10">
+      <div className="relative z-50 mx-auto grid max-w-[1600px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 md:px-10">
         <a href="#topo" className="flex min-w-0 items-center gap-3">
           <Logo />
         </a>
