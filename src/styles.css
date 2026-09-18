@@ -77,6 +77,10 @@
 
   html {
     scroll-behavior: smooth;
+    /* Faz o navegador renderizar barra de rolagem, campos e controles
+       nativos em tema escuro — sem isso eles saem claros sobre o fundo
+       preto, principalmente no Windows. */
+    color-scheme: dark;
   }
 
   body {

@@ -10,6 +10,7 @@ import {
 import { type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { SITE_URL, absoluteUrl } from "../lib/site";
 
 function NotFoundComponent() {
   return (
@@ -78,14 +79,31 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         name: "description",
         content: "O boteco do Dino. Grandes clássicos do rock, ao vivo, do jeito que o rock merece.",
       },
+      // Cor da barra do navegador no celular. Equivale ao token `ink`
+      // (oklch(0.14 0.005 60)), que é o fundo do body.
+      { name: "theme-color", content: "#0b0907" },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "Barzim de Rock" },
+      { property: "og:locale", content: "pt_BR" },
+      { property: "og:url", content: SITE_URL },
+      // Sem og:image absoluta o link compartilhado sai sem imagem nenhuma.
+      // Largura e altura evitam que o WhatsApp corte errado antes de baixar.
+      { property: "og:image", content: absoluteUrl("og.jpg") },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content: "Público de braços erguidos em um show do Barzim de Rock",
+      },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: absoluteUrl("og.jpg") },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+      { rel: "canonical", href: SITE_URL },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
