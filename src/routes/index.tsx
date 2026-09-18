@@ -345,45 +345,59 @@ function Home() {
       </section>
 
       {/* ------------------------------------------------------ O BARZIM */}
-      {/* Sem `max-w` e sem `mx-auto`: a foto sangra até a borda direita da
-          tela. Numa tela larga, a coluna centrada de antes deixava faixas
-          vazias dos dois lados — o "buraco" que o site tinha. */}
-      <section id="o-barzim" className="grid items-center gap-12 lg:grid-cols-2 lg:gap-0">
-        <div className="px-5 py-24 md:px-10 md:py-32 lg:ml-auto lg:max-w-[64rem] lg:pr-24">
-          <h2 className="display titulo-secao max-w-[11ch]">Isso não é só um show</h2>
-          <p className="corpo mt-8 max-w-[60ch] text-bone/80">
-            Começou pequeno, num balcão de madeira, com clássicos que todo mundo sabe de cor. Hoje é
-            uma noite inteira construída pelo público — e ainda tem cara de boteco.
-          </p>
+      {/* A foto é ancorada na borda direita por posicionamento absoluto, e o
+          texto vive dentro do mesmo container das outras seções. É isso que
+          põe o título na mesma margem esquerda do resto da página — antes o
+          `ml-auto` empurrava a coluna para o meio e abria um vazio enorme à
+          esquerda.
 
-          <dl className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 lg:grid-cols-2">
-            {[
-              ["+120", "noites de barzim"],
-              ["+40", "cidades"],
-              ["3h", "de clássicos"],
-              ["1", "coro só"],
-            ].map(([n, l]) => (
-              <div key={l}>
-                <dt className="display numeral">{n}</dt>
-                <dd className="mt-3 text-base text-ash">{l}</dd>
-              </div>
-            ))}
-          </dl>
-          <DemoTag className="mt-10 max-w-[48ch]" />
-        </div>
-
-        <figure className="relative m-0 h-[60vh] min-h-[26rem] lg:h-screen">
+          Proporção 56/40 em vez de 50/50: a informação pesa mais que a foto. */}
+      <section id="o-barzim" className="relative overflow-hidden">
+        <figure className="m-0 lg:absolute lg:inset-y-0 lg:right-0 lg:w-[40%]">
           <img
             src={FOTO_PALCO.src}
             srcSet={FOTO_PALCO.srcSet}
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="(min-width: 1024px) 40vw, 100vw"
             alt={FOTO_PALCO.alt}
             loading="lazy"
             width={FOTO_PALCO.width}
             height={FOTO_PALCO.height}
-            className="h-full w-full object-cover"
+            className="h-[50vh] w-full object-cover lg:h-full"
           />
+          {/* Esfuma a borda interna da foto contra o fundo, para a divisa não
+              virar um corte reto no meio da tela. */}
+          <span className="pointer-events-none absolute inset-y-0 left-0 hidden w-32 bg-gradient-to-r from-ink to-transparent lg:block" />
         </figure>
+
+        <div className="mx-auto max-w-[min(92vw,2200px)] px-5 py-24 md:px-10 md:py-32">
+          <div className="lg:w-[56%] lg:py-8">
+            <h2 className="display titulo-secao max-w-[11ch]">Isso não é só um show</h2>
+
+            <p className="lead mt-8 max-w-[54ch] text-bone/85">
+              Começou pequeno, num balcão de madeira, com clássicos que todo mundo sabe de cor. Hoje
+              é uma noite inteira construída pelo público — e ainda tem cara de boteco.
+            </p>
+
+            {/* Quatro em linha, com régua entre eles: os números são o
+                argumento da seção, então ocupam a largura toda em vez de se
+                espremerem num quadrado 2x2. */}
+            <dl className="mt-16 grid grid-cols-2 gap-x-10 gap-y-12 sm:grid-cols-4">
+              {[
+                ["+120", "noites de barzim"],
+                ["+40", "cidades"],
+                ["3h", "de clássicos"],
+                ["1", "coro só"],
+              ].map(([n, l]) => (
+                <div key={l} className="hairline pt-5">
+                  <dt className="display numeral">{n}</dt>
+                  <dd className="mt-3 text-base text-ash">{l}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <DemoTag className="mt-12 max-w-[56ch]" />
+          </div>
+        </div>
       </section>
 
       {/* ------------------------------------------------------ MOMENTOS */}
