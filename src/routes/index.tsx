@@ -90,15 +90,9 @@ const FOTO_HERO = foto(
   "Mar de cabeças da plateia banhado por luz âmbar quente, com o palco pequeno ao fundo em vermelho e os telões mostrando Dino com a guitarra vermelha.",
 );
 
-/**
- * Foto vertical de proposito: o quadro desta secao e retrato (0,86), e uma
- * foto 3:2 deitada perdia 43% da largura no object-cover — era isso que
- * deixava a imagem com cara de espremida. Esta ja nasce 4:5.
- */
 const FOTO_PALCO = foto(
-  "vertical-dino-feixes-laranja",
-  "Dino cantando e tocando guitarra na passarela elevada e, abaixo, a banda no palco principal sob feixes laranja, com a plateia na base do enquadramento.",
-  "retrato",
+  "palco-vermelho-dino-bracos-abertos",
+  'Dino de braços abertos ao centro do palco com a guitarra, sob luz vermelha intensa, com o letreiro "DINO BARZIM DE ROCK" ocupando todo o cenário de bar ao fundo.',
 );
 
 /**
@@ -351,59 +345,61 @@ function Home() {
       </section>
 
       {/* ------------------------------------------------------ O BARZIM */}
-      {/* A foto é ancorada na borda direita por posicionamento absoluto, e o
-          texto vive dentro do mesmo container das outras seções. É isso que
-          põe o título na mesma margem esquerda do resto da página — antes o
-          `ml-auto` empurrava a coluna para o meio e abria um vazio enorme à
-          esquerda.
+      {/* A informação vem primeiro e ocupa a largura inteira; a foto entra
+          embaixo como faixa de borda a borda.
 
-          Proporção 56/40 em vez de 50/50: a informação pesa mais que a foto. */}
-      <section id="o-barzim" className="relative overflow-hidden">
-        <figure className="m-0 lg:absolute lg:inset-y-0 lg:right-0 lg:w-[48%]">
+          A versão anterior punha a foto numa coluna vertical ao lado do
+          texto, e isso obrigava a escolher entre duas coisas ruins: cortar
+          43% de uma foto 3:2 deitada, ou trocá-la por um quadro vertical de
+          Reel, de composição pior. Numa faixa larga a foto profissional entra
+          inteira na horizontal, que é como ela foi enquadrada. */}
+      <section id="o-barzim" className="hairline border-b border-white/10">
+        <div className="mx-auto max-w-[min(92vw,2200px)] px-5 pb-16 pt-24 md:px-10 md:pb-20 md:pt-28">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
+            <h2 className="display titulo-secao-destaque max-w-[9ch]">Isso não é só um show</h2>
+
+            <div className="lg:pt-3">
+              <p className="lead max-w-[58ch] text-bone/85">
+                Começou pequeno, num balcão de madeira, com clássicos que todo mundo sabe de cor.
+                Hoje é uma noite inteira construída pelo público — e ainda tem cara de boteco.
+              </p>
+
+              {/* Os quatro números são o argumento da seção, então ficam em
+                  linha, com régua em cima, ocupando toda a coluna. */}
+              <dl className="mt-14 grid grid-cols-2 gap-x-10 gap-y-12 sm:grid-cols-4">
+                {[
+                  ["+120", "noites de barzim"],
+                  ["+40", "cidades"],
+                  ["3h", "de clássicos"],
+                  ["1", "coro só"],
+                ].map(([n, l]) => (
+                  <div key={l} className="hairline pt-5">
+                    <dt className="display numeral">{n}</dt>
+                    <dd className="mt-3 text-base text-ash">{l}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <DemoTag className="mt-12 max-w-[60ch]" />
+            </div>
+          </div>
+        </div>
+
+        <figure className="relative m-0">
           <img
             src={FOTO_PALCO.src}
             srcSet={FOTO_PALCO.srcSet}
-            sizes="(min-width: 1024px) 48vw, 100vw"
+            sizes="100vw"
             alt={FOTO_PALCO.alt}
             loading="lazy"
             width={FOTO_PALCO.width}
             height={FOTO_PALCO.height}
-            className="h-[50vh] w-full object-cover lg:h-full"
+            className="h-[72vh] max-h-[50rem] min-h-[22rem] w-full object-cover object-center"
           />
-          {/* Esfuma a borda interna da foto contra o fundo, para a divisa não
-              virar um corte reto no meio da tela. */}
-          <span className="pointer-events-none absolute inset-y-0 left-0 hidden w-32 bg-gradient-to-r from-ink to-transparent lg:block" />
+          <figcaption className="mx-auto max-w-[min(92vw,2200px)] px-5 pt-4 text-sm text-ash md:px-10">
+            {CREDITO_FOTOS}
+          </figcaption>
         </figure>
-
-        <div className="mx-auto max-w-[min(92vw,2200px)] px-5 py-20 md:px-10 md:py-24">
-          <div className="lg:w-[48%]">
-            <h2 className="display titulo-secao-destaque max-w-[9ch]">Isso não é só um show</h2>
-
-            <p className="lead mt-10 max-w-[62ch] text-bone/85">
-              Começou pequeno, num balcão de madeira, com clássicos que todo mundo sabe de cor. Hoje
-              é uma noite inteira construída pelo público — e ainda tem cara de boteco.
-            </p>
-
-            {/* Quatro em linha, com régua entre eles: os números são o
-                argumento da seção, então ocupam a largura toda em vez de se
-                espremerem num quadrado 2x2. */}
-            <dl className="mt-20 grid grid-cols-2 gap-x-10 gap-y-12 sm:grid-cols-4">
-              {[
-                ["+120", "noites de barzim"],
-                ["+40", "cidades"],
-                ["3h", "de clássicos"],
-                ["1", "coro só"],
-              ].map(([n, l]) => (
-                <div key={l} className="hairline pt-5">
-                  <dt className="display numeral">{n}</dt>
-                  <dd className="mt-3 text-base text-ash">{l}</dd>
-                </div>
-              ))}
-            </dl>
-
-            <DemoTag className="mt-12 max-w-[56ch]" />
-          </div>
-        </div>
       </section>
 
       {/* ------------------------------------------------------ MOMENTOS */}
