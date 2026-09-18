@@ -5,6 +5,14 @@ import tailwindcss from "@tailwindcss/vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 import { nitro } from "nitro/vite";
 
+// Na Vercel, VERCEL_URL traz o dominio do deploy atual, inclusive dos
+// deploys de preview. Sem isso as meta tags de compartilhamento apontariam
+// para barzimderock.com.br antes desse dominio existir, e o preview do
+// WhatsApp quebraria em todo ambiente que nao fosse producao.
+if (!process.env.VITE_SITE_URL && process.env.VERCEL_URL) {
+  process.env.VITE_SITE_URL = `https://${process.env.VERCEL_URL}`;
+}
+
 export default defineConfig({
   server: {
     port: 8080,
@@ -20,13 +28,8 @@ export default defineConfig({
     }),
     // Precisa vir depois do tanstackStart.
     viteReact(),
-    // Alvo de deploy: Cloudflare Workers. Gera .output/server/wrangler.json.
-    // Trocar de plataforma é trocar este preset (node-server, vercel, netlify…).
-    nitro({
-      config: {
-        preset: "cloudflare_module",
-        cloudflare: { wrangler: { name: "barzim-de-rock" } },
-      },
-    }),
+    // Alvo de deploy: Vercel. Trocar de plataforma é trocar este preset
+    // (cloudflare_module, node-server, netlify…).
+    nitro({ config: { preset: "vercel" } }),
   ],
 });

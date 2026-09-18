@@ -77,7 +77,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Barzim de Rock — Dino Fonseca" },
       {
         name: "description",
-        content: "O boteco do Dino. Grandes clássicos do rock, ao vivo, do jeito que o rock merece.",
+        content:
+          "O boteco do Dino. Grandes clássicos do rock, ao vivo, do jeito que o rock merece.",
       },
       // Cor da barra do navegador no celular. Equivale ao token `ink`
       // (oklch(0.14 0.005 60)), que é o fundo do body.

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Header } from "@/components/barzim/Header";
 import { Logo } from "@/components/barzim/Logo";
 import { Reveal } from "@/components/barzim/Reveal";
+import { INSTAGRAM, INSTAGRAM_HANDLE, whatsappUrl } from "@/lib/site";
 
 import hero from "@/assets/hero.jpg";
 import editorial1 from "@/assets/editorial-1.jpg";
@@ -103,6 +104,63 @@ const PRODUTOS = [
   { nome: "Pôster Turnê (Série Demo)", img: prodPoster, preco: "R$ 79,00" },
 ];
 
+/**
+ * Colunas do rodapé. Os contatos caem no WhatsApp com a mensagem já escrita,
+ * o que identifica de onde veio cada conversa. O que ainda não tem destino
+ * próprio aponta para a seção correspondente da página — nenhum link morre
+ * em "#topo".
+ */
+const COLUNAS_RODAPE = [
+  {
+    titulo: "Navegue",
+    links: [
+      { label: "O Barzim", href: "#o-barzim" },
+      { label: "Momentos", href: "#momentos" },
+      { label: "Agenda", href: "#agenda" },
+      { label: "Loja", href: "#loja" },
+      { label: "Galeria", href: "#galeria" },
+    ],
+  },
+  {
+    titulo: "Produção",
+    links: [
+      { label: "Sobre o projeto", href: "#o-barzim" },
+      {
+        label: "Rider técnico",
+        href: whatsappUrl("Olá! Gostaria de receber o rider técnico do Barzim de Rock."),
+      },
+      {
+        label: "Trabalhe conosco",
+        href: whatsappUrl("Olá! Gostaria de falar sobre trabalhar com o Barzim de Rock."),
+      },
+    ],
+  },
+  {
+    titulo: "Contato",
+    links: [
+      {
+        label: "Imprensa",
+        href: whatsappUrl("Olá! Sou da imprensa e gostaria de falar sobre o Barzim de Rock."),
+      },
+      {
+        label: "Contratação",
+        href: whatsappUrl("Olá! Gostaria de contratar o Barzim de Rock para um evento."),
+      },
+      {
+        label: "Parcerias",
+        href: whatsappUrl("Olá! Gostaria de propor uma parceria com o Barzim de Rock."),
+      },
+    ],
+  },
+];
+
+/** Redes com perfil de verdade. Adicione aqui quando houver YouTube, TikTok
+ *  ou Spotify — link que mente sobre o destino é pior que link ausente. */
+const REDES = [
+  { label: "Instagram", href: INSTAGRAM },
+  { label: "WhatsApp", href: whatsappUrl("Olá! Vim pelo site do Barzim de Rock.") },
+];
+
 const GALERIA = [
   { img: gal1, alt: "Baterista tocando sob luz quente em um bar" },
   { img: editorial2, alt: "Público cantando junto com copos erguidos" },
@@ -135,19 +193,13 @@ function Play({ big = false }: { big?: boolean }) {
 function DemoTag({ className = "" }: { className?: string }) {
   return (
     <p className={`text-[0.68rem] leading-relaxed tracking-wide text-bone/40 ${className}`}>
-      Conteúdo demonstrativo — datas, locais, preços e produtos são fictícios e servem apenas
-      para visualização do protótipo.
+      Conteúdo demonstrativo — datas, locais, preços e produtos são fictícios e servem apenas para
+      visualização do protótipo.
     </p>
   );
 }
 
-function SectionTitle({
-  eyebrow,
-  children,
-}: {
-  eyebrow: string;
-  children: React.ReactNode;
-}) {
+function SectionTitle({ eyebrow, children }: { eyebrow: string; children: React.ReactNode }) {
   return (
     <div>
       <p className="eyebrow">{eyebrow}</p>
@@ -183,7 +235,6 @@ function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/55 to-ink" />
 
         <div className="relative mx-auto flex min-h-[100svh] max-w-[1400px] flex-col justify-end px-5 pb-14 pt-32 md:px-10 md:pb-20">
-
           {/* Primeira dobra sem <Reveal>: é o LCP da página e o primeiro
               contato com a marca. Aparece pronta, não animada. */}
           <p className="eyebrow">Site oficial · Dino Fonseca</p>
@@ -238,15 +289,13 @@ function Home() {
           <div className="lg:col-span-5">
             <Reveal>
               <SectionTitle eyebrow="O Barzim">
-                Isso não é
-                <span className="block text-ember">só um show</span>
+                Isso não é<span className="block text-ember">só um show</span>
               </SectionTitle>
             </Reveal>
             <Reveal delay={120}>
               <p className="mt-8 max-w-md text-lg font-light leading-relaxed text-bone/70">
-                Começou pequeno, num balcão de madeira, com clássicos que todo mundo sabe de
-                cor. Hoje é uma noite inteira construída pelo público — e ainda tem cara de
-                boteco.
+                Começou pequeno, num balcão de madeira, com clássicos que todo mundo sabe de cor.
+                Hoje é uma noite inteira construída pelo público — e ainda tem cara de boteco.
               </p>
             </Reveal>
             <Reveal delay={200}>
@@ -500,12 +549,12 @@ function Home() {
               <span className="block text-ember">fora do palco</span>
             </SectionTitle>
             <a
-              href="https://instagram.com/barzimderock"
+              href={INSTAGRAM}
               target="_blank"
               rel="noreferrer"
               className="btn-base btn-ghost w-fit"
             >
-              @barzimderock
+              {INSTAGRAM_HANDLE}
             </a>
           </div>
         </Reveal>
@@ -514,7 +563,7 @@ function Home() {
           {[reel1, gal1, editorial2, reel3, gal3, reel4].map((img, i) => (
             <Reveal key={i} delay={i * 70}>
               <a
-                href="https://instagram.com/barzimderock"
+                href={INSTAGRAM}
                 target="_blank"
                 rel="noreferrer"
                 className="group relative block aspect-square overflow-hidden"
@@ -573,43 +622,42 @@ function Home() {
           <div className="md:col-span-1">
             <Logo />
           </div>
-          {[
-            {
-              t: "Navegue",
-              l: ["O Barzim", "Momentos", "Agenda", "Loja", "Galeria"],
-            },
-            { t: "Produção", l: ["Sobre o projeto", "Rider técnico", "Trabalhe conosco"] },
-            { t: "Contato", l: ["Imprensa", "Contratação", "Parcerias"] },
-          ].map((c) => (
-            <div key={c.t}>
-              <p className="eyebrow">{c.t}</p>
+          {COLUNAS_RODAPE.map((c) => (
+            <div key={c.titulo}>
+              <p className="eyebrow">{c.titulo}</p>
               <ul className="mt-5 space-y-3">
-                {c.l.map((x) => (
-                  <li key={x}>
-                    <a
-                      href="#topo"
-                      className="text-sm text-bone/60 transition-colors hover:text-ember"
-                    >
-                      {x}
-                    </a>
-                  </li>
-                ))}
+                {c.links.map((l) => {
+                  const externo = l.href.startsWith("http");
+                  return (
+                    <li key={l.label}>
+                      <a
+                        href={l.href}
+                        {...(externo && { target: "_blank", rel: "noreferrer" })}
+                        className="text-sm text-bone/60 transition-colors hover:text-ember"
+                      >
+                        {l.label}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
         </div>
 
         <div className="hairline mt-14 flex flex-col gap-4 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          {/* Só entra aqui rede que tem destino real. Antes havia YouTube,
+              TikTok e Spotify, e os três abriam o Instagram. */}
           <div className="flex gap-6">
-            {["Instagram", "YouTube", "TikTok", "Spotify"].map((s) => (
+            {REDES.map((r) => (
               <a
-                key={s}
-                href="https://instagram.com/barzimderock"
+                key={r.label}
+                href={r.href}
                 target="_blank"
                 rel="noreferrer"
                 className="display text-[0.7rem] tracking-[0.2em] text-bone/55 transition-colors hover:text-ember"
               >
-                {s}
+                {r.label}
               </a>
             ))}
           </div>

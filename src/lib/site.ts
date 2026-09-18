@@ -17,3 +17,18 @@ export const SITE_URL = (import.meta.env.VITE_SITE_URL ?? "https://barzimderock.
 export function absoluteUrl(path: string): string {
   return `${SITE_URL}/${path.replace(/^\/+/, "")}`;
 }
+
+/**
+ * WhatsApp de contato em formato internacional (E.164, só dígitos):
+ * 55 = Brasil, 34 = DDD, 99710-7006.
+ */
+export const WHATSAPP = "5534997107006";
+
+/** Link do WhatsApp com mensagem já preenchida. */
+export function whatsappUrl(mensagem: string): string {
+  return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(mensagem)}`;
+}
+
+/** Perfil oficial no Instagram. */
+export const INSTAGRAM = "https://www.instagram.com/barzimderock/";
+export const INSTAGRAM_HANDLE = "@barzimderock";

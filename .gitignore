@@ -35,3 +35,6 @@ dist-ssr
 .claude/
 .agents/
 skills-lock.json
+
+# Vercel
+.vercel
