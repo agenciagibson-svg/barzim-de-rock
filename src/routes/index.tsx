@@ -369,11 +369,11 @@ function Home() {
           <span className="pointer-events-none absolute inset-y-0 left-0 hidden w-32 bg-gradient-to-r from-ink to-transparent lg:block" />
         </figure>
 
-        <div className="mx-auto max-w-[min(92vw,2200px)] px-5 py-24 md:px-10 md:py-32">
-          <div className="lg:w-[56%] lg:py-8">
-            <h2 className="display titulo-secao max-w-[11ch]">Isso não é só um show</h2>
+        <div className="mx-auto max-w-[min(92vw,2200px)] px-5 py-20 md:px-10 md:py-28">
+          <div className="lg:w-[56%]">
+            <h2 className="display titulo-secao-destaque max-w-[9ch]">Isso não é só um show</h2>
 
-            <p className="lead mt-8 max-w-[54ch] text-bone/85">
+            <p className="lead mt-10 max-w-[62ch] text-bone/85">
               Começou pequeno, num balcão de madeira, com clássicos que todo mundo sabe de cor. Hoje
               é uma noite inteira construída pelo público — e ainda tem cara de boteco.
             </p>
@@ -381,7 +381,7 @@ function Home() {
             {/* Quatro em linha, com régua entre eles: os números são o
                 argumento da seção, então ocupam a largura toda em vez de se
                 espremerem num quadrado 2x2. */}
-            <dl className="mt-16 grid grid-cols-2 gap-x-10 gap-y-12 sm:grid-cols-4">
+            <dl className="mt-20 grid grid-cols-2 gap-x-10 gap-y-12 sm:grid-cols-4">
               {[
                 ["+120", "noites de barzim"],
                 ["+40", "cidades"],
