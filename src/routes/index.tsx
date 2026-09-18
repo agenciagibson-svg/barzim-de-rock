@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/barzim/Header";
 import { Logo } from "@/components/barzim/Logo";
 import { Reveal } from "@/components/barzim/Reveal";
-import { VideoVertical } from "@/components/barzim/VideoVertical";
+import { PalcoMomentos } from "@/components/barzim/PalcoMomentos";
 import { INSTAGRAM, INSTAGRAM_HANDLE, whatsappUrl } from "@/lib/site";
 
 import { CREDITO_FOTOS, foto } from "@/lib/fotos";
@@ -403,19 +403,29 @@ function Home() {
       </section>
 
       {/* ------------------------------------------------------ MOMENTOS */}
-      <section id="momentos" className="hairline border-b border-white/10 py-24 md:py-32">
-        <div className="px-5 md:px-10">
-          <h2 className="display titulo-secao-destaque max-w-[9ch]">Momentos do Barzim</h2>
-
-          {/* Três vídeos, três colunas: a grade preenche a largura inteira em
-              vez de deixar a quarta coluna vazia. */}
-          <div className="mt-14 grid gap-4 md:grid-cols-3 md:gap-6">
-            {MOMENTOS.map((m) => (
-              <VideoVertical key={m.id} {...m} />
-            ))}
+      {/* Fundo próprio e um pouco mais claro que o resto: é o palco, e ele
+          precisa se destacar do preto das outras seções sem mudar a paleta. */}
+      <section
+        id="momentos"
+        className="grain hairline relative overflow-hidden border-b border-white/10 bg-charcoal/50 py-24 md:py-32"
+      >
+        <div className="mx-auto max-w-[min(92vw,2200px)] px-5 md:px-10">
+          {/* Capa de apresentação da seção. */}
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+            <div>
+              <p className="eyebrow">Uma noite, em três tempos</p>
+              <h2 className="display titulo-secao-destaque mt-5 max-w-[9ch]">Momentos do Barzim</h2>
+            </div>
+            <p className="lead max-w-[34ch] text-bone/80 lg:pb-3">
+              Da pulseira na entrada ao brinde depois da última música — filmado por quem estava lá.
+            </p>
           </div>
 
-          <p className="mt-10 text-sm text-ash">{CREDITO_FOTOS}</p>
+          <div className="mt-16 md:mt-20">
+            <PalcoMomentos momentos={MOMENTOS} />
+          </div>
+
+          <p className="mt-12 text-sm text-ash">{CREDITO_FOTOS}</p>
         </div>
       </section>
 
