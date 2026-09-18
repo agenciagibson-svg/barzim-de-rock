@@ -105,11 +105,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "canonical", href: SITE_URL },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      // Fontes auto-hospedadas (ver @font-face em styles.css). Só o Anton
+      // latin entra em preload: é a face do <h1>, que é o LCP da página.
+      // Pré-carregar as outras roubaria banda dele no 4G.
       {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap",
+        rel: "preload",
+        as: "font",
+        type: "font/woff2",
+        href: "/fonts/anton-400-latin.woff2",
+        crossOrigin: "anonymous",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
