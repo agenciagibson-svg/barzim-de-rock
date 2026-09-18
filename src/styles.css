@@ -193,7 +193,7 @@
   font-family: var(--font-display);
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   line-height: 0.92;
 }
 
@@ -212,13 +212,21 @@
 /** Título do hero. */
 @utility titulo-hero {
   font-size: clamp(3.25rem, 14vw, 17rem);
-  line-height: 0.84;
+  line-height: 0.88;
 }
 
 /** Título de seção. */
 @utility titulo-secao {
-  font-size: clamp(3.75rem, 9vw, 11rem);
-  line-height: 0.88;
+  font-size: clamp(2.5rem, 5.1vw, 6rem);
+  line-height: 0.9;
+}
+
+/** Título de seção em destaque. A referência reserva 144-190px para as
+ *  seções que sustentam a página e deixa as outras em 96px — é a variação de
+ *  tamanho que carrega a hierarquia. */
+@utility titulo-secao-destaque {
+  font-size: clamp(3.25rem, 8.5vw, 10rem);
+  line-height: 0.85;
 }
 
 /** Título dentro de seção: nome de produto, cidade na agenda. */

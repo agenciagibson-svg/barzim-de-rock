@@ -249,11 +249,25 @@ function DemoTag({ className = "" }: { className?: string }) {
   );
 }
 
-function SectionTitle({ eyebrow, children }: { eyebrow: string; children: React.ReactNode }) {
+function SectionTitle({
+  eyebrow,
+  children,
+  destaque = false,
+}: {
+  eyebrow: string;
+  children: React.ReactNode;
+  destaque?: boolean;
+}) {
   return (
     <div>
       <p className="eyebrow">{eyebrow}</p>
-      <h2 className="display titulo-secao mt-5 max-w-[11ch]">{children}</h2>
+      <h2
+        className={`display mt-5 ${
+          destaque ? "titulo-secao-destaque max-w-[9ch]" : "titulo-secao max-w-[11ch]"
+        }`}
+      >
+        {children}
+      </h2>
     </div>
   );
 }
@@ -375,7 +389,7 @@ function Home() {
       {/* ------------------------------------------------------ MOMENTOS */}
       <section id="momentos" className="hairline border-b border-white/10 py-24 md:py-32">
         <div className="px-5 md:px-10">
-          <h2 className="display titulo-secao max-w-[11ch]">Momentos do Barzim</h2>
+          <h2 className="display titulo-secao-destaque max-w-[9ch]">Momentos do Barzim</h2>
 
           {/* Três vídeos, três colunas: a grade preenche a largura inteira em
               vez de deixar a quarta coluna vazia. */}
@@ -393,7 +407,9 @@ function Home() {
       <section id="agenda" className="border-y border-white/10 bg-charcoal/40 py-24 md:py-32">
         <div className="mx-auto max-w-[min(92vw,2200px)] px-5 md:px-10">
           <Reveal>
-            <SectionTitle eyebrow="Agenda">Próximas edições</SectionTitle>
+            <SectionTitle eyebrow="Agenda" destaque>
+              Próximas edições
+            </SectionTitle>
           </Reveal>
 
           <div className="mt-14 grid gap-5 lg:grid-cols-3">
@@ -506,7 +522,7 @@ function Home() {
                 loading="lazy"
                 width={g.width}
                 height={g.height}
-                className="h-[52vh] w-auto object-cover md:h-[72vh]"
+                className="h-[42vh] max-h-[30rem] w-auto object-cover md:h-[56vh]"
               />
             </li>
           ))}
