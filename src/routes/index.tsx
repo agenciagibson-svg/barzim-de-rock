@@ -242,7 +242,7 @@ function Play({ big = false }: { big?: boolean }) {
 
 function DemoTag({ className = "" }: { className?: string }) {
   return (
-    <p className={`text-[0.68rem] leading-relaxed tracking-wide text-bone/40 ${className}`}>
+    <p className={`text-sm leading-relaxed text-ash/80 ${className}`}>
       Conteúdo demonstrativo — datas, locais, preços e produtos são fictícios e servem apenas para
       visualização do protótipo.
     </p>
@@ -253,7 +253,7 @@ function SectionTitle({ eyebrow, children }: { eyebrow: string; children: React.
   return (
     <div>
       <p className="eyebrow">{eyebrow}</p>
-      <h2 className="display mt-4 text-[2.6rem] sm:text-6xl lg:text-7xl">{children}</h2>
+      <h2 className="display titulo-secao mt-5">{children}</h2>
     </div>
   );
 }
@@ -286,19 +286,16 @@ function Home() {
               contato com a marca. Aparece pronta, não animada. */}
           <p className="eyebrow">Site oficial · Dino Fonseca</p>
 
-          {/* Anton ocupa bem mais largura que o Oswald no mesmo corpo. O
-              clamp é calibrado para a linha mais longa ("O boteco do Dino.")
-              não estourar em nenhuma largura entre 320px e 1600px. */}
-          <h1 className="display mt-5 max-w-[18ch] text-[clamp(2.5rem,8.5vw,8.5rem)] leading-[0.86]">
+          <h1 className="display titulo-hero mt-6">
             O boteco do Dino.
             <span className="block text-ember">Do jeito que o rock merece.</span>
           </h1>
 
-          <p className="mt-7 max-w-xl text-lg font-light text-bone/75 sm:text-xl">
+          <p className="lead mt-8 max-w-[45ch] text-bone/80">
             Uma noite. Grandes clássicos. Milhares de vozes.
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <a href="#agenda" className="btn-base btn-ember">
               Próximo Barzim
             </a>
@@ -309,17 +306,17 @@ function Home() {
 
           {/* Próxima edição */}
           <Reveal delay={400}>
-            <div className="mt-14 max-w-3xl border-t border-white/15 pt-6">
-              <div className="grid gap-5 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-8">
+            <div className="mt-16 max-w-4xl border-t border-white/15 pt-8">
+              <div className="grid gap-6 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-10">
                 <div>
                   <p className="eyebrow">Próxima edição</p>
-                  <p className="display mt-2 text-4xl sm:text-5xl">
+                  <p className="display numeral mt-3">
                     12 <span className="text-ember">ABR</span>
                   </p>
                 </div>
                 <div className="min-w-0">
-                  <p className="display text-xl">Vila Aurora · SP</p>
-                  <p className="mt-1 truncate text-sm text-bone/60">
+                  <p className="display titulo-bloco">Vila Aurora · SP</p>
+                  <p className="mt-2 truncate text-base text-ash">
                     Galpão Estação Velha · Sábado, 21h
                   </p>
                 </div>
@@ -339,10 +336,8 @@ function Home() {
           vazias dos dois lados — o "buraco" que o site tinha. */}
       <section id="o-barzim" className="grid items-center gap-12 lg:grid-cols-2 lg:gap-0">
         <div className="px-5 py-24 md:px-10 md:py-36 lg:ml-auto lg:max-w-[46rem] lg:pr-20">
-          <h2 className="display text-[2.2rem] leading-[1] sm:text-[2.6rem]">
-            Isso não é só um show
-          </h2>
-          <p className="mt-8 max-w-[60ch] text-[1.0625rem] leading-[1.6] text-bone/80">
+          <h2 className="display titulo-secao">Isso não é só um show</h2>
+          <p className="corpo mt-8 max-w-[60ch] text-bone/80">
             Começou pequeno, num balcão de madeira, com clássicos que todo mundo sabe de cor. Hoje é
             uma noite inteira construída pelo público — e ainda tem cara de boteco.
           </p>
@@ -355,8 +350,8 @@ function Home() {
               ["1", "coro só"],
             ].map(([n, l]) => (
               <div key={l}>
-                <dt className="display text-[3.5rem] leading-[0.9]">{n}</dt>
-                <dd className="mt-2 text-sm text-ash">{l}</dd>
+                <dt className="display numeral">{n}</dt>
+                <dd className="mt-3 text-base text-ash">{l}</dd>
               </div>
             ))}
           </dl>
@@ -380,9 +375,7 @@ function Home() {
       {/* ------------------------------------------------------ MOMENTOS */}
       <section id="momentos" className="hairline border-b border-white/10 py-24 md:py-32">
         <div className="px-5 md:px-10">
-          <h2 className="display text-[clamp(3.25rem,8vw,6.5rem)] leading-[0.88]">
-            Momentos do Barzim
-          </h2>
+          <h2 className="display titulo-secao">Momentos do Barzim</h2>
 
           {/* Três vídeos, três colunas: a grade preenche a largura inteira em
               vez de deixar a quarta coluna vazia. */}
@@ -392,7 +385,7 @@ function Home() {
             ))}
           </div>
 
-          <p className="mt-8 text-xs text-ash">{CREDITO_FOTOS}</p>
+          <p className="mt-10 text-sm text-ash">{CREDITO_FOTOS}</p>
         </div>
       </section>
 
@@ -409,12 +402,12 @@ function Home() {
                 <article className="group flex h-full flex-col justify-between border border-white/10 bg-ink p-7 transition-colors duration-500 hover:border-ember/60 md:p-9">
                   <div>
                     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
-                      <p className="display text-4xl md:text-5xl">
+                      <p className="display numeral">
                         {s.data.split(" ")[0]}{" "}
                         <span className="text-ember">{s.data.split(" ")[1]}</span>
                       </p>
                       <span
-                        className={`shrink-0 rounded-full border px-3 py-1 text-[0.62rem] uppercase tracking-[0.16em] ${
+                        className={`shrink-0 rounded-full border px-4 py-1.5 text-[0.7rem] uppercase tracking-[0.16em] ${
                           s.status === "Em breve"
                             ? "border-white/25 text-bone/55"
                             : "border-ember/70 text-ember"
@@ -423,10 +416,10 @@ function Home() {
                         {s.status}
                       </span>
                     </div>
-                    <p className="display mt-6 text-2xl">
+                    <p className="display titulo-bloco mt-7">
                       {s.cidade} · {s.uf}
                     </p>
-                    <p className="mt-2 text-sm text-bone/55">
+                    <p className="mt-3 text-base text-ash">
                       {s.diaSemana} · {s.local}
                     </p>
                   </div>
@@ -474,10 +467,10 @@ function Home() {
                 </div>
                 <div className="flex flex-1 flex-col justify-between gap-4 p-4 md:p-6">
                   <div>
-                    <h3 className="display text-base leading-tight md:text-xl">{p.nome}</h3>
-                    <p className="mt-2 text-sm text-ember">{p.preco}</p>
+                    <h3 className="display titulo-bloco">{p.nome}</h3>
+                    <p className="mt-3 text-lg text-ash">{p.preco}</p>
                   </div>
-                  <span className="display text-[0.68rem] tracking-[0.2em] text-bone/55 transition-colors group-hover:text-ember">
+                  <span className="display text-sm tracking-[0.2em] text-ash transition-colors group-hover:text-bone">
                     Ver produto →
                   </span>
                 </div>
@@ -491,7 +484,7 @@ function Home() {
       {/* -------------------------------------------------------- GALERIA */}
       <section id="galeria" className="hairline border-b border-white/10 py-24 md:py-32">
         <div className="px-5 md:px-10">
-          <h2 className="display text-[2.2rem] leading-[1] sm:text-[2.6rem]">Retratos da noite</h2>
+          <h2 className="display titulo-secao">Retratos da noite</h2>
         </div>
 
         {/* Faixa que sangra dos dois lados e rola na horizontal. Substitui o
@@ -518,26 +511,26 @@ function Home() {
         </ul>
 
         <div className="px-5 md:px-10">
-          <p className="mt-6 text-xs text-ash">{CREDITO_FOTOS}</p>
+          <p className="mt-8 text-sm text-ash">{CREDITO_FOTOS}</p>
         </div>
       </section>
 
       {/* ----------------------------------------------------- NEWSLETTER */}
       <section className="grain relative overflow-hidden border-t border-white/10 bg-charcoal py-24 md:py-32">
-        <div className="mx-auto max-w-3xl px-5 text-center md:px-10">
+        <div className="mx-auto max-w-4xl px-5 text-center md:px-10">
           <Reveal>
             <p className="eyebrow">Newsletter</p>
-            <h2 className="display mt-4 text-[2.6rem] sm:text-6xl">
+            <h2 className="display titulo-secao mt-5">
               Entre pro <span className="text-ember">Barzim</span>
             </h2>
-            <p className="mx-auto mt-5 max-w-md text-bone/65">
+            <p className="lead mx-auto mt-6 max-w-[40ch] text-bone/80">
               Datas novas, pré-venda e bastidores antes de todo mundo.
             </p>
           </Reveal>
           <Reveal delay={120}>
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="mx-auto mt-10 flex max-w-lg flex-col gap-3 sm:flex-row"
+              className="mx-auto mt-12 flex max-w-xl flex-col gap-3 sm:flex-row"
             >
               <label className="sr-only" htmlFor="email">
                 Seu e-mail
@@ -547,9 +540,9 @@ function Home() {
                 type="email"
                 required
                 placeholder="seu@email.com"
-                className="h-[52px] flex-1 rounded-sm border border-white/20 bg-ink px-4 text-bone outline-none transition-colors placeholder:text-bone/35 focus:border-ember"
+                className="h-[58px] flex-1 rounded-sm border border-white/25 bg-ink px-5 text-base text-bone transition-colors placeholder:text-ash focus-visible:border-ember focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember"
               />
-              <button type="submit" className="btn-base btn-ember h-[52px]">
+              <button type="submit" className="btn-base btn-ember h-[58px]">
                 Quero entrar
               </button>
             </form>
@@ -574,7 +567,7 @@ function Home() {
                       <a
                         href={l.href}
                         {...(externo && { target: "_blank", rel: "noreferrer" })}
-                        className="text-sm text-bone/60 transition-colors hover:text-ember"
+                        className="text-base text-ash transition-colors hover:text-bone"
                       >
                         {l.label}
                       </a>
@@ -596,13 +589,13 @@ function Home() {
                 href={r.href}
                 target="_blank"
                 rel="noreferrer"
-                className="display text-[0.7rem] tracking-[0.2em] text-bone/55 transition-colors hover:text-ember"
+                className="display text-sm tracking-[0.2em] text-ash transition-colors hover:text-bone"
               >
                 {r.label}
               </a>
             ))}
           </div>
-          <p className="text-xs text-bone/35">
+          <p className="text-sm text-ash/70">
             © {new Date().getFullYear()} Barzim de Rock · Dino Fonseca
           </p>
         </div>

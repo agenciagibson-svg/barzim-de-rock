@@ -56,12 +56,12 @@ export function Header() {
           <Logo />
         </a>
 
-        <nav className="hidden items-center gap-9 lg:flex">
+        <nav className="hidden items-center gap-10 lg:flex">
           {NAV.map((n) => (
             <a
               key={n.href}
               href={n.href}
-              className="display text-xs tracking-[0.22em] text-bone/75 transition-colors hover:text-ember"
+              className="display text-sm tracking-[0.22em] text-bone/80 transition-colors hover:text-bone"
             >
               {n.label}
             </a>

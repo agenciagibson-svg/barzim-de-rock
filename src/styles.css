@@ -197,12 +197,61 @@
   line-height: 0.92;
 }
 
+/* ---------------------------------------------------------------------------
+ * Escala tipográfica.
+ *
+ * Tudo em clamp com vw no meio: o tamanho acompanha a tela em vez de parar
+ * num degrau de breakpoint. Era esse o problema — em 1890px o título travava
+ * em 136px e o resto do texto ficava do tamanho de um blog.
+ *
+ * Os limites de cima foram calculados com a métrica real do Anton medida no
+ * navegador: com letter-spacing -0.03em, "Do jeito que o rock" ocupa 6,99em,
+ * então numa coluna de 1600px o título cabe até ~217px sem estourar.
+ * ------------------------------------------------------------------------- */
+
+/** Título do hero. */
+@utility titulo-hero {
+  font-size: clamp(3rem, 13vw, 13.5rem);
+  line-height: 0.84;
+}
+
+/** Título de seção. */
+@utility titulo-secao {
+  font-size: clamp(2.5rem, 6.5vw, 6.5rem);
+  line-height: 0.88;
+}
+
+/** Título dentro de seção: nome de produto, cidade na agenda. */
+@utility titulo-bloco {
+  font-size: clamp(1.5rem, 2.4vw, 2.5rem);
+  line-height: 1;
+}
+
+/** Numeral grande: data da agenda, estatística. */
+@utility numeral {
+  font-size: clamp(3rem, 5vw, 5.5rem);
+  line-height: 0.85;
+}
+
+/** Linha de apoio sob um título. */
+@utility lead {
+  font-size: clamp(1.125rem, 1.5vw, 1.75rem);
+  line-height: 1.45;
+  font-weight: 300;
+}
+
+/** Corpo de texto. Medida alvo de 60 a 64 caracteres. */
+@utility corpo {
+  font-size: clamp(1rem, 1.05vw, 1.25rem);
+  line-height: 1.6;
+}
+
 @utility eyebrow {
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.28em;
-  font-size: 0.7rem;
+  font-size: clamp(0.75rem, 0.85vw, 1rem);
   color: var(--ember);
 }
 
@@ -260,8 +309,8 @@
   font-family: var(--font-sans);
   font-weight: 600;
   letter-spacing: 0;
-  font-size: 0.95rem;
-  padding: 0.95rem 1.6rem;
+  font-size: clamp(0.95rem, 1.05vw, 1.1875rem);
+  padding: clamp(0.95rem, 1.1vw, 1.35rem) clamp(1.6rem, 2vw, 2.4rem);
   border-radius: 2px;
   transition:
     transform 0.15s ease,
