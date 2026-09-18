@@ -1,0 +1,6 @@
+[install]
+saveTextLockfile = true
+# Guarda contra ataque de cadeia de suprimentos: ignora versoes publicadas ha
+# menos de 24h. Cada entrada em minimumReleaseAgeExcludes fura essa guarda para
+# um pacote — confirme com o time antes de adicionar qualquer uma.
+minimumReleaseAge = 86400

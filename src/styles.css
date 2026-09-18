@@ -1,0 +1,196 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-ink: var(--ink);
+  --color-charcoal: var(--charcoal);
+  --color-ember: var(--ember);
+  --color-ember-deep: var(--ember-deep);
+  --color-bone: var(--bone);
+  --font-display: "Oswald", "Arial Narrow", sans-serif;
+  --font-sans: "Barlow", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.25rem;
+  --ink: oklch(0.14 0.005 60);
+  --charcoal: oklch(0.2 0.006 60);
+  --ember: oklch(0.66 0.17 45);
+  --ember-deep: oklch(0.52 0.15 42);
+  --bone: oklch(0.96 0.008 85);
+
+  --background: var(--ink);
+  --foreground: var(--bone);
+  --card: var(--charcoal);
+  --card-foreground: var(--bone);
+  --popover: var(--charcoal);
+  --popover-foreground: var(--bone);
+  --primary: var(--ember);
+  --primary-foreground: oklch(0.14 0.005 60);
+  --secondary: oklch(0.26 0.008 60);
+  --secondary-foreground: var(--bone);
+  --muted: oklch(0.26 0.008 60);
+  --muted-foreground: oklch(0.68 0.012 70);
+  --accent: var(--ember);
+  --accent-foreground: oklch(0.14 0.005 60);
+  --destructive: oklch(0.6 0.2 27);
+  --destructive-foreground: var(--bone);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: var(--ember);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--ember);
+    color: var(--ink);
+  }
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+}
+
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.7rem;
+  color: var(--ember);
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.28;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
+}
+
+/* Visível por padrão, de propósito.
+ *
+ * O estado escondido só passa a existir onde há script para revelá-lo de
+ * volta: sem JS, ou em navegador que não entenda `scripting`, o conteúdo
+ * simplesmente aparece. Antes a regra era o contrário — o HTML do servidor
+ * saía com 43 blocos em opacity 0 e a página dependia de JS para existir.
+ *
+ * Quem pediu menos movimento no sistema não recebe movimento nenhum. */
+@utility reveal {
+  @media (scripting: enabled) {
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &[data-visible="false"] {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &[data-visible="false"] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@utility btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.82rem;
+  padding: 0.95rem 1.6rem;
+  border-radius: 2px;
+  transition:
+    transform 0.15s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+  &:active {
+    transform: translateY(1px) scale(0.985);
+  }
+}
+
+@utility btn-ember {
+  background: var(--ember);
+  color: var(--ink);
+  &:hover {
+    background: var(--bone);
+  }
+}
+
+@utility btn-ghost {
+  border: 1px solid oklch(1 0 0 / 35%);
+  color: var(--bone);
+  &:hover {
+    border-color: var(--ember);
+    color: var(--ember);
+  }
+}
+
+@utility hairline {
+  border-top: 1px solid oklch(1 0 0 / 10%);
+}
