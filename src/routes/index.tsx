@@ -253,7 +253,7 @@ function SectionTitle({ eyebrow, children }: { eyebrow: string; children: React.
   return (
     <div>
       <p className="eyebrow">{eyebrow}</p>
-      <h2 className="display titulo-secao mt-5">{children}</h2>
+      <h2 className="display titulo-secao mt-5 max-w-[11ch]">{children}</h2>
     </div>
   );
 }
@@ -281,7 +281,7 @@ function Home() {
         <div className="absolute inset-0 bg-ink/45" />
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink to-transparent" />
 
-        <div className="relative mx-auto flex min-h-[100svh] max-w-[1600px] flex-col justify-end px-5 pb-14 pt-32 md:px-10 md:pb-20">
+        <div className="relative mx-auto flex min-h-[100svh] max-w-[min(92vw,2200px)] flex-col justify-end px-5 pb-14 pt-32 md:px-10 md:pb-20">
           {/* Primeira dobra sem <Reveal>: é o LCP da página e o primeiro
               contato com a marca. Aparece pronta, não animada. */}
           <p className="eyebrow">Site oficial · Dino Fonseca</p>
@@ -335,8 +335,8 @@ function Home() {
           tela. Numa tela larga, a coluna centrada de antes deixava faixas
           vazias dos dois lados — o "buraco" que o site tinha. */}
       <section id="o-barzim" className="grid items-center gap-12 lg:grid-cols-2 lg:gap-0">
-        <div className="px-5 py-24 md:px-10 md:py-36 lg:ml-auto lg:max-w-[46rem] lg:pr-20">
-          <h2 className="display titulo-secao">Isso não é só um show</h2>
+        <div className="px-5 py-24 md:px-10 md:py-32 lg:ml-auto lg:max-w-[64rem] lg:pr-24">
+          <h2 className="display titulo-secao max-w-[11ch]">Isso não é só um show</h2>
           <p className="corpo mt-8 max-w-[60ch] text-bone/80">
             Começou pequeno, num balcão de madeira, com clássicos que todo mundo sabe de cor. Hoje é
             uma noite inteira construída pelo público — e ainda tem cara de boteco.
@@ -375,7 +375,7 @@ function Home() {
       {/* ------------------------------------------------------ MOMENTOS */}
       <section id="momentos" className="hairline border-b border-white/10 py-24 md:py-32">
         <div className="px-5 md:px-10">
-          <h2 className="display titulo-secao">Momentos do Barzim</h2>
+          <h2 className="display titulo-secao max-w-[11ch]">Momentos do Barzim</h2>
 
           {/* Três vídeos, três colunas: a grade preenche a largura inteira em
               vez de deixar a quarta coluna vazia. */}
@@ -391,7 +391,7 @@ function Home() {
 
       {/* --------------------------------------------------------- AGENDA */}
       <section id="agenda" className="border-y border-white/10 bg-charcoal/40 py-24 md:py-32">
-        <div className="mx-auto max-w-[1600px] px-5 md:px-10">
+        <div className="mx-auto max-w-[min(92vw,2200px)] px-5 md:px-10">
           <Reveal>
             <SectionTitle eyebrow="Agenda">Próximas edições</SectionTitle>
           </Reveal>
@@ -441,50 +441,52 @@ function Home() {
       </section>
 
       {/* ----------------------------------------------------------- LOJA */}
-      <section id="loja" className="mx-auto max-w-[1600px] px-5 py-24 md:px-10 md:py-32">
-        <Reveal>
-          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
-            <SectionTitle eyebrow="Store">Barzim Store</SectionTitle>
-            <a href="#loja" className="btn-base btn-ghost w-fit">
-              Entrar na loja
-            </a>
-          </div>
-        </Reveal>
+      <section id="loja" className="py-24 md:py-32">
+        <div className="mx-auto max-w-[min(92vw,2200px)] px-5 md:px-10">
+          <Reveal>
+            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+              <SectionTitle eyebrow="Store">Barzim Store</SectionTitle>
+              <a href="#loja" className="btn-base btn-ghost w-fit">
+                Entrar na loja
+              </a>
+            </div>
+          </Reveal>
 
-        <div className="mt-14 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
-          {PRODUTOS.map((p, i) => (
-            <Reveal key={p.nome} delay={i * 90}>
-              <article className="group flex h-full flex-col border border-white/10 bg-charcoal transition-colors duration-500 hover:border-ember/50">
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <img
-                    src={p.img}
-                    alt={p.nome}
-                    loading="lazy"
-                    width={900}
-                    height={1100}
-                    className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col justify-between gap-4 p-4 md:p-6">
-                  <div>
-                    <h3 className="display titulo-bloco">{p.nome}</h3>
-                    <p className="mt-3 text-lg text-ash">{p.preco}</p>
+          <div className="mt-14 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+            {PRODUTOS.map((p, i) => (
+              <Reveal key={p.nome} delay={i * 90}>
+                <article className="group flex h-full flex-col border border-white/10 bg-charcoal transition-colors duration-500 hover:border-ember/50">
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <img
+                      src={p.img}
+                      alt={p.nome}
+                      loading="lazy"
+                      width={900}
+                      height={1100}
+                      className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
+                    />
                   </div>
-                  <span className="display text-sm tracking-[0.2em] text-ash transition-colors group-hover:text-bone">
-                    Ver produto →
-                  </span>
-                </div>
-              </article>
-            </Reveal>
-          ))}
+                  <div className="flex flex-1 flex-col justify-between gap-4 p-4 md:p-6">
+                    <div>
+                      <h3 className="display titulo-bloco">{p.nome}</h3>
+                      <p className="mt-3 text-lg text-ash">{p.preco}</p>
+                    </div>
+                    <span className="display text-sm tracking-[0.2em] text-ash transition-colors group-hover:text-bone">
+                      Ver produto →
+                    </span>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+          <DemoTag className="mt-8" />
         </div>
-        <DemoTag className="mt-8" />
       </section>
 
       {/* -------------------------------------------------------- GALERIA */}
       <section id="galeria" className="hairline border-b border-white/10 py-24 md:py-32">
         <div className="px-5 md:px-10">
-          <h2 className="display titulo-secao">Retratos da noite</h2>
+          <h2 className="display titulo-secao max-w-[11ch]">Retratos da noite</h2>
         </div>
 
         {/* Faixa que sangra dos dois lados e rola na horizontal. Substitui o
@@ -504,7 +506,7 @@ function Home() {
                 loading="lazy"
                 width={g.width}
                 height={g.height}
-                className="h-[42vh] max-h-[30rem] w-auto object-cover md:h-[56vh]"
+                className="h-[52vh] w-auto object-cover md:h-[72vh]"
               />
             </li>
           ))}
@@ -517,20 +519,20 @@ function Home() {
 
       {/* ----------------------------------------------------- NEWSLETTER */}
       <section className="grain relative overflow-hidden border-t border-white/10 bg-charcoal py-24 md:py-32">
-        <div className="mx-auto max-w-4xl px-5 text-center md:px-10">
+        <div className="mx-auto grid max-w-[min(92vw,2200px)] items-end gap-12 px-5 md:grid-cols-[1.1fr_0.9fr] md:px-10">
           <Reveal>
             <p className="eyebrow">Newsletter</p>
-            <h2 className="display titulo-secao mt-5">
+            <h2 className="display titulo-secao mt-5 max-w-[11ch]">
               Entre pro <span className="text-ember">Barzim</span>
             </h2>
-            <p className="lead mx-auto mt-6 max-w-[40ch] text-bone/80">
+            <p className="lead mt-6 max-w-[40ch] text-bone/80">
               Datas novas, pré-venda e bastidores antes de todo mundo.
             </p>
           </Reveal>
           <Reveal delay={120}>
             <form
               onSubmit={(e) => e.preventDefault()}
-              className="mx-auto mt-12 flex max-w-xl flex-col gap-3 sm:flex-row"
+              className="mt-12 flex w-full flex-col gap-3 sm:flex-row"
             >
               <label className="sr-only" htmlFor="email">
                 Seu e-mail
@@ -551,7 +553,7 @@ function Home() {
       </section>
 
       {/* ---------------------------------------------------------- FOOTER */}
-      <footer className="mx-auto max-w-[1600px] px-5 py-16 md:px-10 md:py-20">
+      <footer className="mx-auto max-w-[min(92vw,2200px)] px-5 py-16 md:px-10 md:py-20">
         <div className="grid gap-12 md:grid-cols-4">
           <div className="md:col-span-1">
             <Logo />
