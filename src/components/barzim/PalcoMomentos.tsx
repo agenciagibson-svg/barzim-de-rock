@@ -53,10 +53,31 @@ export function PalcoMomentos({ momentos }: { momentos: Momento[] }) {
     return () => el.removeEventListener("keydown", onKey);
   }, [ativo, irPara]);
 
+  /**
+   * Preview vivo: a capa do card em foco roda muda e em loop.
+   *
+   * O gatilho é a aproximação do visitante — mouse sobre o palco, ou foco
+   * pelo teclado —, não a rolagem da página. Dois motivos: cada vídeo tem
+   * ~11 MB, e ninguém deve pagar isso por passar reto; e a regra do projeto
+   * é que movimento responda a um gesto, não aconteça sozinho.
+   *
+   * Quem pediu menos movimento no sistema, ou está economizando dados, fica
+   * com a capa parada.
+   */
+  const [previewLiberado, setPreviewLiberado] = useState(false);
+
+  const aproximou = useCallback(() => {
+    if (previewLiberado) return;
+    const semMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const conexao = (navigator as { connection?: { saveData?: boolean } }).connection;
+    if (semMovimento || conexao?.saveData) return;
+    setPreviewLiberado(true);
+  }, [previewLiberado]);
+
   const momentoAtivo = momentos[ativo];
 
   return (
-    <div ref={palcoRef} className="palco">
+    <div ref={palcoRef} className="palco" onPointerEnter={aproximou} onFocusCapture={aproximou}>
       <div className="palco-trilho">
         {momentos.map((m, i) => {
           // Distância até o card em foco, dando a volta nas pontas.
@@ -111,6 +132,30 @@ export function PalcoMomentos({ momentos }: { momentos: Momento[] }) {
                     decoding="async"
                     className="absolute inset-0 h-full w-full object-cover"
                   />
+
+                  {/* A capa que se mexe. Fica por cima da imagem e some junto
+                      com ela quando o card sai de foco, então a troca continua
+                      sendo um corte limpo. */}
+                  {emFoco && previewLiberado && (
+                    <video
+                      key={`preview-${m.id}`}
+                      src={m.video}
+                      poster={m.poster}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="none"
+                      tabIndex={-1}
+                      aria-hidden="true"
+                      // Alguns navegadores adiam o autoplay mudo quando a aba
+                      // acabou de ganhar foco. Pedir explicitamente resolve, e
+                      // a falha e silenciosa: sobra a capa parada.
+                      onCanPlay={(e) => void e.currentTarget.play().catch(() => {})}
+                      className="palco-preview absolute inset-0 h-full w-full object-cover"
+                    />
+                  )}
+
                   <span className="absolute inset-0 bg-gradient-to-t from-ink via-ink/15 to-transparent" />
 
                   {emFoco && (
